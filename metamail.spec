@@ -5,7 +5,7 @@ Summary(pl):	Zestaw narzêdzi do obs³ugi standardu MIME
 Summary(tr):	MIME iþleme araçlarý
 Name:		metamail
 Version:	2.7
-Release:	21
+Release:	23
 Copyright:	distributable
 Group:		Applications/Mail
 Group(pl):	Aplikacje/Poczta
@@ -20,9 +20,11 @@ Patch6:		mm-tmpfile.patch
 Patch7:		mm-ohnonotagain.patch
 Patch8:		mm-arghhh.patch
 Patch9:		mm-ncurses.patch
+Patch10:	mm-nl.patch
 BuildRequires:	ncurses-devel >= 5.0
 Requires:	mktemp
 Requires:	sharutils
+Requires:	/usr/lib/sendmail
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %define		_fontdir	%{_libdir}/metamail/fonts
@@ -31,26 +33,27 @@ BuildRoot:	/tmp/%{name}-%{version}-root
 Metamail is an implementation of MIME, the Multipurpose Internet Mail
 Extensions, a proposed standard for multimedia mail on the Internet.
 Metamail implements MIME, and also implements extensibility and
-configuration via the "mailcap" mechanism described in an
-informational RFC that is a companion to the MIME document.
+configuration via the "mailcap" mechanism described in an informational RFC
+that is a companion to the MIME document.
 
 %description -l pl
-Metamail obs³uguje standard MIME (rozszerzenie poczty internetowej
-dla ró¿nych celów) u¿ywany do przesy³ania poczt± plików 
-multimedialnych. MIME jest te¿ wykorzystywany do kodowania znaków
-narodowych w listach i artyku³ach news.
+Metamail obs³uguje standard MIME (rozszerzenie poczty internetowej dla
+ró¿nych celów) u¿ywany do przesy³ania poczt± plików multimedialnych. MIME
+jest te¿ wykorzystywany do kodowania znaków narodowych w listach i
+artyku³ach news.
 
 %prep
 %setup -q -n mm%{version}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
+%patch0  -p1
+%patch1  -p1
+%patch2  -p1
+%patch3  -p1
+%patch4  -p1
+%patch5  -p1
+%patch7  -p1
+%patch8  -p1
+%patch9  -p1
+%patch10 -p1
 
 %build
 cd src
