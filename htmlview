@@ -1,0 +1,167 @@
+#!/bin/bash
+#
+# Invoke whatever HTML viewer is installed...
+# Usage:
+#	htmlview [--remote|--local] URL
+#	--remote: We need support for remote (http/ftp) URLs
+#	--local: This is a local (doc) html file
+#	If neither --remote nor --local is given, it will
+#	be determined automatically.
+#
+# List the tools in order of preference.
+#
+# written by Bernhard Rosenkraenzer <bero@redhat.com>
+# (c) 2000-2001 Red Hat, Inc.
+#
+# made insensitive on file extention and piped stdout detection
+# by Andrzej M. Krzysztofowicz <ankry@pld.org.pl>
+#
+# This script is in the public domain.
+
+if [ "$1" == "--remote" ]; then
+	REMOTE=1
+	shift
+elif [ "$1" == "--local" ]; then
+	REMOTE=0
+	shift
+else
+	if echo $1 |egrep -q "^(http://|ftp://|www\.|ftp\.)" 2>/dev/null; then
+		REMOTE=1
+	else
+		REMOTE=0
+	fi
+fi
+if ls -l /proc/self/fd/1 | grep 'pipe:' >/dev/null 2>&1; then
+	STDOUT_IS_PIPE=1
+else
+	STDOUT_IS_PIPE=0
+fi
+
+ELINKS_CMD ()
+{
+	if [ "$1" = --name ] ; then
+		echo /usr/bin/elinks
+	elif [ "$1" = --dumpcmd ]; then
+		shift
+		echo -n /usr/bin/elinks -dump $*
+		if [ $STDOUT_IS_PIPE = 0 ]; then
+			echo \| ${PAGER:-/usr/bin/more}
+		else
+			echo
+		fi
+	else
+		if [ $STDOUT_IS_PIPE = 0 ]; then
+			/usr/bin/elinks -dump $* | ${PAGER:-/usr/bin/more}
+		else
+			/usr/bin/elinks -dump $*
+		fi
+	fi
+}
+LINKS_CMD ()
+{
+	if [ "$1" = --name ] ; then
+		echo /usr/bin/links
+	elif [ "$1" = --dumpcmd ]; then
+		shift
+		echo -n /usr/bin/links -dump $*
+		if [ $STDOUT_IS_PIPE = 0 ]; then
+			echo \| ${PAGER:-/usr/bin/more}
+		else
+			echo
+		fi
+	else
+		if [ $STDOUT_IS_PIPE = 0 ]; then
+			/usr/bin/links -dump $* | ${PAGER:-/usr/bin/more}
+		else
+			/usr/bin/links -dump $*
+		fi
+	fi
+}
+LYNX_CMD ()
+{
+	if [ "$1" = --name ]; then
+		echo /usr/bin/lynx
+	elif [ "$1" = --dumpcmd ]; then
+		shift
+		echo /usr/bin/lynx --force-html $*
+	elif [ $STDOUT_IS_PIPE = 0 ]; then
+		/usr/bin/lynx --force-html $*
+	else
+		/usr/bin/lynx --force-html -dump $*
+	fi
+}
+W3M_CMD ()
+{
+	if [ "$1" = --name ] ; then
+		echo /usr/bin/w3m
+	elif [ "$1" = --dumpcmd ]; then
+		shift
+		echo /usr/bin/w3m -T text/html $*
+	else
+		/usr/bin/w3m -T text/html $*
+	fi
+}
+IS_FUNC ()
+{
+	if declare -F | sed "s/^declare -f //" | grep "^$1\$" >/dev/null ;
+	then
+		return 0
+	else
+		return 1
+	fi
+}
+IS_FUNC_WORKING ()
+{
+	IS_FUNC "$1" && test -x `$1 --name`
+}
+
+TERMS_KDE="/usr/bin/konsole /usr/bin/kvt"
+TERMS_GNOME="/usr/bin/gnome-terminal"
+TERMS_GENERIC="/usr/bin/rxvt /usr/X11R6/bin/xterm /usr/bin/Eterm"
+if [ $REMOTE == 1 ]; then
+	TTYTOOLS="/usr/bin/elinks /usr/bin/links /usr/bin/lynx /usr/bin/w3m"
+	X11TOOLS_KDE="/usr/bin/konqueror /usr/bin/kfmbrowser"
+	X11TOOLS_GNOME="/usr/bin/galeon /usr/bin/mozilla"
+	X11TOOLS_GENERIC="/usr/bin/mozilla /usr/bin/netscape"
+else
+	TTYTOOLS="ELINKS_CMD LINKS_CMD LYNX_CMD W3M_CMD /usr/bin/less /bin/more /bin/cat"
+	X11TOOLS_KDE="/usr/bin/khelpcenter /usr/bin/konqueror /usr/bin/khcclient /usr/bin/kdehelp /usr/bin/kfmbrowser"
+	X11TOOLS_GNOME="/usr/bin/gnome-help-browser"
+	X11TOOLS_GENERIC="/usr/bin/mozilla /usr/bin/netscape"
+fi
+
+if [ "x`/sbin/pidof gnome-session`" != "x" ]; then
+	X11TOOLS="$X11TOOLS_GNOME $X11TOOLS_KDE $X11TOOLS_GENERIC"
+	TERMS="$TERMS_GNOME $TERMS_KDE $TERMS_GENERIC"
+else
+	X11TOOLS="$X11TOOLS_KDE $X11TOOLS_GNOME $X11TOOLS_GENERIC"
+	TERMS="$TERMS_KDE $TERMS_GNOME $TERMS_GENERIC"
+fi
+
+if test "x$DISPLAY" = x; then
+	for i in $TTYTOOLS; do
+		if IS_FUNC_WORKING $i; then
+			$i $*
+			exit $?
+		elif [ -x $i ]; then
+			exec $i $*
+		fi
+	done
+else
+	for i in $X11TOOLS; do
+		[ -x $i ] && exec $i $*
+	done
+	for i in $TERMS; do
+		if [ -x $i ]; then
+			CONSOLE="$i -e"
+			break
+		fi
+	done
+	for i in $TTYTOOLS; do
+		if IS_FUNC_WORKING $i; then
+			exec $CONSOLE `$i --dumpcmd $*`
+		elif [ -x $i ]; then
+			exec $CONSOLE $i $*
+		fi
+	done
+fi
