@@ -57,9 +57,9 @@ mkdir -p $RPM_BUILD_ROOT/{usr/bin,usr/lib/metamail/fonts,usr/man/man1}
 cd src
 make INSTROOT=$RPM_BUILD_ROOT/usr install-all
 
-install fonts/*.pcf $RPM_BUILD_ROOT/usr/lib/metamail/fonts
-install fonts/fonts.alias $RPM_BUILD_ROOT/usr/lib/metamail/fonts
-mkfontdir $RPM_BUILD_ROOT/usr/lib/metamail/fonts
+install fonts/*.pcf $RPM_BUILD_ROOT%{_libdir}/metamail/fonts
+install fonts/fonts.alias $RPM_BUILD_ROOT%{_libdir}/metamail/fonts
+mkfontdir $RPM_BUILD_ROOT%{_libdir}/metamail/fonts
 
 rm -f $RPM_BUILD_ROOT/usr/bin/*.orig
 
@@ -69,7 +69,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644, root, root, 755)
 %doc src/README src/CREDITS src/mailers.txt
-/usr/lib/metamail
+%{_libdir}/metamail
 %attr(755, root, root) /usr/bin/*
 %{_mandir}/man1/*
 
