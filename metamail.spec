@@ -91,14 +91,12 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/*~
 
 ln -f $RPM_BUILD_ROOT%{_bindir}/mmencode $RPM_BUILD_ROOT%{_bindir}/mimencode
 
-gzip -9nf README CREDITS mailers.txt
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc src/{README,CREDITS,mailers.txt}.gz
+%doc src/{README,CREDITS,mailers.txt}
 
 %attr(755,root,root) %{_bindir}/*
 
