@@ -82,7 +82,7 @@ cd src
 
 install fonts/*.pcf 	  $RPM_BUILD_ROOT%{_fontdir}
 install fonts/fonts.alias $RPM_BUILD_ROOT%{_fontdir}
-tar xjf %{SOURCE1} -C $RPM_BUILD_ROOT%{_mandir}
+bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 mkfontdir $RPM_BUILD_ROOT%{_fontdir}
 
 rm -f $RPM_BUILD_ROOT%{_bindir}/*.orig
