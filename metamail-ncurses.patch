@@ -1,0 +1,24 @@
+diff -Nru mm2.7/src/metamail/Makefile mm2.7.new/src/metamail/Makefile
+--- mm2.7/src/metamail/Makefile	Sun Aug  1 23:04:53 1993
++++ mm2.7.new/src/metamail/Makefile	Sun Oct 18 10:04:42 1998
+@@ -45,7 +45,7 @@
+ 
+ mailto: mailto.o codes.o shared.o
+ 	rm -f mailto
+-	$(CC) $(LOCALCFLAGS) -o mailto  mailto.o  codes.o shared.o -ltermcap $(LDLIBS)
++	$(CC) $(LOCALCFLAGS) -o mailto  mailto.o  codes.o shared.o -lncurses $(LDLIBS)
+ 
+ splitmail: splitmail.o shared.o
+ 	rm -f splitmail
+diff -Nru mm2.7/src/richmail/Makefile mm2.7.new/src/richmail/Makefile
+--- mm2.7/src/richmail/Makefile	Mon Mar 15 20:32:42 1993
++++ mm2.7.new/src/richmail/Makefile	Sun Oct 18 10:05:08 1998
+@@ -34,7 +34,7 @@
+ all:  richtext richtoatk
+ 
+ richtext: richtext.o $(RICHOBJS)
+-	$(CC) ${LOCALCFLAGS} -o richtext richtext.o $(RICHOBJS) -ltermcap $(LDLIBS)
++	$(CC) ${LOCALCFLAGS} -o richtext richtext.o $(RICHOBJS) -lncurses $(LDLIBS)
+ 
+ richtoatk: richtoatk.o $(RICHOBJS)
+ 	$(CC) ${LOCALCFLAGS} -o richtoatk richtoatk.o $(RICHOBJS) $(LDLIBS)
