@@ -5,7 +5,7 @@ Summary(pl):	Zestaw narzêdzi do obs³ugi standardu MIME
 Summary(tr):	MIME iþleme araçlarý
 Name:		metamail
 Version:	2.7
-Release:	23
+Release:	24
 Copyright:	distributable
 Group:		Applications/Mail
 Group(pt):	Aplicações/Correio Eletrônico
