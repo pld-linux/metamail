@@ -6,7 +6,7 @@ Summary(tr):	MIME iþleme araçlarý
 Name:		metamail
 Version:	2.7
 Release:	29
-License:	Distributable
+License:	distributable
 Group:		Applications/Mail
 Group(de):	Applikationen/Post
 Group(pl):	Aplikacje/Poczta
