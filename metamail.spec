@@ -5,7 +5,7 @@ Summary(pl):	Zestaw narzêdzi do obs³ugi standardu MIME
 Summary(tr):	MIME iþleme araçlarý
 Name:		metamail
 Version:	2.7
-Release:	32
+Release:	33
 License:	distributable
 Group:		Applications/Mail
 Source0:	ftp://thumper.bellcore.com/pub/nsb/mm%{version}.tar.Z
@@ -29,6 +29,7 @@ Patch12:	%{name}-fixawk.patch
 Patch13:	%{name}-fixpartial.patch
 Patch14:	%{name}-usesox.patch
 Patch15:	%{name}-suggestedname.patch
+Patch16:	%{name}-security.patch
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	XFree86
 Requires:	mktemp
@@ -70,6 +71,7 @@ i artyku³ach news.
 %patch13 -p1
 %patch14 -p1
 %patch15 -p1
+%patch16 -p1
 
 %build
 cd src
