@@ -8,8 +8,9 @@ Version:	2.7
 Release:	23
 Copyright:	distributable
 Group:		Applications/Mail
+Group(pt):	Aplicações/Correio Eletrônico
 Group(pl):	Aplikacje/Poczta
-Source:		ftp://thumper.bellcore.com/pub/nsp/metamail/mm%{version}.tar.Z
+Source0:	ftp://thumper.bellcore.com/pub/nsp/metamail/mm%{version}.tar.Z
 Patch0:		mm-make.patch
 Patch1:		mm-fonts.patch
 Patch2:		mm-glibc.patch
@@ -33,14 +34,14 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Metamail is an implementation of MIME, the Multipurpose Internet Mail
 Extensions, a proposed standard for multimedia mail on the Internet.
 Metamail implements MIME, and also implements extensibility and
-configuration via the "mailcap" mechanism described in an informational RFC
-that is a companion to the MIME document.
+configuration via the "mailcap" mechanism described in an
+informational RFC that is a companion to the MIME document.
 
 %description -l pl
 Metamail obs³uguje standard MIME (rozszerzenie poczty internetowej dla
-ró¿nych celów) u¿ywany do przesy³ania poczt± plików multimedialnych. MIME
-jest te¿ wykorzystywany do kodowania znaków narodowych w listach i
-artyku³ach news.
+ró¿nych celów) u¿ywany do przesy³ania poczt± plików multimedialnych.
+MIME jest te¿ wykorzystywany do kodowania znaków narodowych w listach
+i artyku³ach news.
 
 %prep
 %setup -q -n mm%{version}
