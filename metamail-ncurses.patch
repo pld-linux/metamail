@@ -6,7 +6,7 @@ diff -Nru mm2.7/src/metamail/Makefile mm2.7.new/src/metamail/Makefile
  mailto: mailto.o codes.o shared.o
  	rm -f mailto
 -	$(CC) $(LOCALCFLAGS) -o mailto  mailto.o  codes.o shared.o -ltermcap $(LDLIBS)
-+	$(CC) $(LOCALCFLAGS) -o mailto  mailto.o  codes.o shared.o -lncurses $(LDLIBS)
++	$(CC) $(LOCALCFLAGS) -o mailto  mailto.o  codes.o shared.o -ltinfo $(LDLIBS)
  
  splitmail: splitmail.o shared.o
  	rm -f splitmail
@@ -18,7 +18,7 @@ diff -Nru mm2.7/src/richmail/Makefile mm2.7.new/src/richmail/Makefile
  
  richtext: richtext.o $(RICHOBJS)
 -	$(CC) ${LOCALCFLAGS} -o richtext richtext.o $(RICHOBJS) -ltermcap $(LDLIBS)
-+	$(CC) ${LOCALCFLAGS} -o richtext richtext.o $(RICHOBJS) -lncurses $(LDLIBS)
++	$(CC) ${LOCALCFLAGS} -o richtext richtext.o $(RICHOBJS) -ltinfo $(LDLIBS)
  
  richtoatk: richtoatk.o $(RICHOBJS)
  	$(CC) ${LOCALCFLAGS} -o richtoatk richtoatk.o $(RICHOBJS) $(LDLIBS)
