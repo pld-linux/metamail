@@ -5,13 +5,14 @@ Summary(pl):	Zestaw narzêdzi do obs³ugi standardu MIME
 Summary(tr):	MIME iþleme araçlarý
 Name:		metamail
 Version:	2.7
-Release:	28
-LIcense:	Distributable
+Release:	29
+License:	Distributable
 Group:		Applications/Mail
 Group(de):	Applikationen/Post
 Group(pl):	Aplikacje/Poczta
 Group(pt):	Aplicações/Correio Eletrônico
 Source0:	ftp://thumper.bellcore.com/pub/nsp/metamail/mm%{version}.tar.Z
+Source1:	%{name}-non-english-man-pages.tar.bz2
 Patch0:		%{name}-make.patch
 Patch1:		%{name}-fonts.patch
 Patch2:		%{name}-glibc.patch
@@ -81,6 +82,7 @@ cd src
 
 install fonts/*.pcf 	  $RPM_BUILD_ROOT%{_fontdir}
 install fonts/fonts.alias $RPM_BUILD_ROOT%{_fontdir}
+tar xjf %{SOURCE1} -C $RPM_BUILD_ROOT%{_mandir}
 mkfontdir $RPM_BUILD_ROOT%{_fontdir}
 
 rm -f $RPM_BUILD_ROOT%{_bindir}/*.orig
@@ -101,3 +103,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_libdir}/metamail
 %{_mandir}/man1/*
+%{_mandir}/fi/man1/*
+%{_mandir}/pl/man1/*
