@@ -25,7 +25,7 @@ BuildRequires:	ncurses-devel >= 5.0
 Requires:	mktemp
 Requires:	sharutils
 Requires:	/usr/lib/sendmail
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_fontdir	%{_libdir}/metamail/fonts
 
