@@ -58,14 +58,14 @@ i artyku³ach news.
 
 %build
 cd src
-make basics
+%{__make} basics
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_fontdir},%{_mandir}/man1}
 
 cd src
-make install-all INSTROOT=$RPM_BUILD_ROOT%{_prefix} \
+%{__make} install-all INSTROOT=$RPM_BUILD_ROOT%{_prefix} \
 	MAN1DIR=$RPM_BUILD_ROOT%{_mandir}/man1 \
 	MAN4DIR=$RPM_BUILD_ROOT%{_mandir}/man4
 
