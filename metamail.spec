@@ -5,7 +5,7 @@ Summary(pl):	Zestaw narzêdzi do obs³ugi standardu MIME
 Summary(tr):	MIME iþleme araçlarý
 Name:		metamail
 Version:	2.7
-Release:	27
+Release:	28
 LIcense:	Distributable
 Group:		Applications/Mail
 Group(de):	Applikationen/Post
@@ -28,6 +28,7 @@ Patch12:	%{name}-fixawk.patch
 Patch13:	%{name}-fixpartial.patch
 Patch14:	%{name}-usesox.patch
 BuildRequires:	ncurses-devel >= 5.0
+BuildRequires:	XFree86
 Requires:	mktemp
 Requires:	sharutils
 Requires:	/usr/lib/sendmail
@@ -84,6 +85,8 @@ mkfontdir $RPM_BUILD_ROOT%{_fontdir}
 
 rm -f $RPM_BUILD_ROOT%{_bindir}/*.orig
 rm -f $RPM_BUILD_ROOT%{_bindir}/*~
+
+ln -f $RPM_BUILD_ROOT%{_bindir}/mmencode $RPM_BUILD_ROOT%{_bindir}/mimencode
 
 gzip -9nf README CREDITS mailers.txt
 
