@@ -5,11 +5,12 @@ Summary(pl):	Zestaw narzêdzi do obs³ugi standardu MIME
 Summary(tr):	MIME iþleme araçlarý
 Name:		metamail
 Version:	2.7
-Release:	24
-Copyright:	distributable
+Release:	26
+LIcense:	Distributable
 Group:		Applications/Mail
-Group(pt):	Aplicações/Correio Eletrônico
+Group(de):	Applikationen/Post
 Group(pl):	Aplikacje/Poczta
+Group(pt):	Aplicações/Correio Eletrônico
 Source0:	ftp://thumper.bellcore.com/pub/nsp/metamail/mm%{version}.tar.Z
 Patch0:		mm-make.patch
 Patch1:		mm-fonts.patch
@@ -22,6 +23,7 @@ Patch7:		mm-ohnonotagain.patch
 Patch8:		mm-arghhh.patch
 Patch9:		mm-ncurses.patch
 Patch10:	mm-nl.patch
+Patch11:	%{name}-linux.patch
 BuildRequires:	ncurses-devel >= 5.0
 Requires:	mktemp
 Requires:	sharutils
@@ -55,6 +57,7 @@ i artyku³ach news.
 %patch8  -p1
 %patch9  -p1
 %patch10 -p1
+%patch11 -p1
 
 %build
 cd src
@@ -76,10 +79,7 @@ mkfontdir $RPM_BUILD_ROOT%{_fontdir}
 rm -f $RPM_BUILD_ROOT%{_bindir}/*.orig
 rm -f $RPM_BUILD_ROOT%{_bindir}/*~
 
-strip --strip-unneeded $RPM_BUILD_ROOT%{_bindir}/* || :
-
-gzip -9nf README CREDITS mailers.txt \
-	$RPM_BUILD_ROOT%{_mandir}/man1/*
+gzip -9nf README CREDITS mailers.txt
 
 %clean
 rm -rf $RPM_BUILD_ROOT
