@@ -67,10 +67,10 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/*.orig
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 %doc src/README src/CREDITS src/mailers.txt
 %{_libdir}/metamail
-%attr(755, root, root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
 
 %changelog
