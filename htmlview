@@ -45,13 +45,13 @@ ELINKS_CMD ()
 		shift
 		echo -n /usr/bin/elinks -dump $*
 		if [ $STDOUT_IS_PIPE = 0 ]; then
-			echo \| ${PAGER:-/usr/bin/more}
+			echo \| ${PAGER:-/bin/more}
 		else
 			echo
 		fi
 	else
 		if [ $STDOUT_IS_PIPE = 0 ]; then
-			/usr/bin/elinks -dump $* | ${PAGER:-/usr/bin/more}
+			/usr/bin/elinks -dump $* | ${PAGER:-/bin/more}
 		else
 			/usr/bin/elinks -dump $*
 		fi
@@ -65,13 +65,13 @@ LINKS_CMD ()
 		shift
 		echo -n /usr/bin/links -dump $*
 		if [ $STDOUT_IS_PIPE = 0 ]; then
-			echo \| ${PAGER:-/usr/bin/more}
+			echo \| ${PAGER:-/bin/more}
 		else
 			echo
 		fi
 	else
 		if [ $STDOUT_IS_PIPE = 0 ]; then
-			/usr/bin/links -dump $* | ${PAGER:-/usr/bin/more}
+			/usr/bin/links -dump $* | ${PAGER:-/bin/more}
 		else
 			/usr/bin/links -dump $*
 		fi
