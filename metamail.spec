@@ -61,7 +61,7 @@ install fonts/*.pcf $RPM_BUILD_ROOT%{_libdir}/metamail/fonts
 install fonts/fonts.alias $RPM_BUILD_ROOT%{_libdir}/metamail/fonts
 mkfontdir $RPM_BUILD_ROOT%{_libdir}/metamail/fonts
 
-rm -f $RPM_BUILD_ROOT/usr/bin/*.orig
+rm -f $RPM_BUILD_ROOT%{_bindir}/*.orig
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -70,13 +70,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644, root, root, 755)
 %doc src/README src/CREDITS src/mailers.txt
 %{_libdir}/metamail
-%attr(755, root, root) /usr/bin/*
+%attr(755, root, root) %{_bindir}/*
 %{_mandir}/man1/*
 
 %changelog
 * Sat Oct 17 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [2.7-19]
-- added removing $RPM_BUILD_ROOT/usr/bin/*.orig in %install,
+- added removing $RPM_BUILD_ROOT%{_bindir}/*.orig in %install,
 - removed -b <sufix> from all %patch,
 - added mm-ncurses.patch patch for compiling mm against libncurses.
 
