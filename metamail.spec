@@ -8,7 +8,8 @@ Version:	2.7
 Release:	31
 License:	distributable
 Group:		Applications/Mail
-Source0:	ftp://thumper.bellcore.com/pub/nsp/metamail/mm%{version}.tar.Z
+Source0:	ftp://thumper.bellcore.com/pub/nsb/mm%{version}.tar.Z
+# Source0-md5:	fd5617ea87e20d7f2fa839e1d1fede60
 Source1:	%{name}-non-english-man-pages.tar.bz2
 Source2:	htmlview
 Patch0:		%{name}-make.patch
