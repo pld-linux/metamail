@@ -31,6 +31,8 @@ BuildRequires:	XFree86
 Requires:	mktemp
 Requires:	sharutils
 Requires:	/usr/lib/sendmail
+Provides:	htmlview
+Obsoletes:	htmlview
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_fontdir	%{_libdir}/metamail/fonts
