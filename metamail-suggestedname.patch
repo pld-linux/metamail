@@ -1,0 +1,83 @@
+--- mm2.7.old/src/metamail/metamail.c	Fri Feb 14 09:55:44 2003
++++ mm2.7/src/metamail/metamail.c	Fri Feb 14 10:51:56 2003
+@@ -155,6 +155,7 @@
+ 
+ char *ContentType = NULL,
+     *ContentEncoding = NULL,
++	*ContentDisposition = NULL,
+     *MailerName = "unknown",
+     *MailSubject = "Mail message",
+     *MailFrom = "unknown sender",
+@@ -264,6 +265,7 @@
+ 
+     ContentType = NULL;
+     ContentEncoding = NULL;
++	ContentDisposition = NULL;
+     MailSubject = "Mail message";
+     MailFrom = "unknown sender";
+     MailSummary = "non-text mail message";
+@@ -521,6 +523,7 @@
+         FILE *fp;
+         int ans = 0, octetstream, ecode=0;
+         suggestedname = FindParam("name");
++		if (!suggestedname) suggestedname = FindParam("filename");
+         if (!suggestedname) {
+             MkTmpFileName(SugBuf);
+             suggestedname = SugBuf;
+@@ -777,7 +780,7 @@
+                     /* strip leading white space */
+                     while (*ContentType && isspace((unsigned char) *ContentType)) ++ContentType;
+                     StripTrailingSpace(ContentType);
+-                    ParseContentParameters(ContentType);
++                    ParseContentParameters(0, ContentType);
+                     break;
+                 case 'd':
+ 		    MightAskBeforeExecuting = 0;
+@@ -1582,6 +1585,7 @@
+ 	BoundaryCt=0;
+ 	return -1;
+     }
++    ContentDisposition = NULL;
+     for (s=mailheaders+oldbytes; *s; ++s) {
+         if (*s == '\n' && (*(s+1) != ' ') && (*(s+1) != '\t')) {
+ 	    if (!ContentType && !lc2strncmp(s, "\ncontent-type:", 14)) {
+@@ -1604,7 +1608,7 @@
+ 		    }
+ 		}
+                 StripTrailingSpace(ContentType);
+-                ParseContentParameters(ContentType);
++                ParseContentParameters(0, ContentType);
+                 if (PrintHeads) maybephead(s+1);
+             } else if (!ContentEncoding && !lc2strncmp(s, "\ncontent-transfer-encoding:", 27)) {
+                 ContentEncoding = FreshHeaderCopy(s+27);
+@@ -1615,9 +1619,13 @@
+             } else if (!lc2strncmp(s, "\nfrom:", 6)) {
+                 if (PrintHeads) maybephead(s+1);
+                 MailFrom = FreshHeaderCopy(s+6);
+-            } else if (!lc2strncmp(s, "\ncontent-description:", 4)) {
++            } else if (!lc2strncmp(s, "\ncontent-description:", 21)) {
+                 if(PrintHeads) maybephead(s+1);
+                 MailSubject = FreshHeaderCopy(s+21);
++            } else if (!ContentDisposition && !lc2strncmp(s, "\ncontent-disposition:", 21)) {
++                ContentDisposition = FreshHeaderCopy(s+21);
++                StripTrailingSpace(ContentDisposition);
++                ParseContentParameters(CParamsUsed, ContentDisposition);
+             } else {
+                 /* Print any with encoded variables */
+                 char *dum = s;
+@@ -2579,12 +2587,13 @@
+ }        
+ 
+ void
+-ParseContentParameters(ct)
++ParseContentParameters(pc, ct)
++int pc;
+ char *ct;
+ {
+     char *s, *t, *eq;
+ 
+-    CParamsUsed = 0;
++    CParamsUsed = pc;
+     s = index(ct, ';');
+     if (!s) return;
+     *s++ = 0;
