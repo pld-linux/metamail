@@ -10,7 +10,7 @@ License:	distributable
 Group:		Applications/Mail
 Source0:	ftp://thumper.bellcore.com/pub/nsb/mm%{version}.tar.Z
 # Source0-md5:	fd5617ea87e20d7f2fa839e1d1fede60
-Source1:	%{name}-non-english-man-pages.tar.bz2
+Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 # Source1-md5:	0ad0e591d536bc4e0d5ae97514ee6cc4
 Source2:	htmlview
 Patch0:		%{name}-make.patch
