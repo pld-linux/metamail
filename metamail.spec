@@ -8,9 +8,6 @@ Version:	2.7
 Release:	29
 License:	distributable
 Group:		Applications/Mail
-Group(de):	Applikationen/Post
-Group(pl):	Aplikacje/Poczta
-Group(pt):	Aplicações/Correio Eletrônico
 Source0:	ftp://thumper.bellcore.com/pub/nsp/metamail/mm%{version}.tar.Z
 Source1:	%{name}-non-english-man-pages.tar.bz2
 Patch0:		%{name}-make.patch
