@@ -103,5 +103,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_libdir}/metamail
 %{_mandir}/man1/*
-%{_mandir}/fi/man1/*
-%{_mandir}/pl/man1/*
+%lang(fi) %{_mandir}/fi/man1/*
+%lang(pl) %{_mandir}/pl/man1/*
