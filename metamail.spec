@@ -5,25 +5,28 @@ Summary(pl):	Zestaw narzêdzi do obs³ugi standardu MIME
 Summary(tr):	MIME iþleme araçlarý
 Name:		metamail
 Version:	2.7
-Release:	26
+Release:	27
 LIcense:	Distributable
 Group:		Applications/Mail
 Group(de):	Applikationen/Post
 Group(pl):	Aplikacje/Poczta
 Group(pt):	Aplicações/Correio Eletrônico
 Source0:	ftp://thumper.bellcore.com/pub/nsp/metamail/mm%{version}.tar.Z
-Patch0:		mm-make.patch
-Patch1:		mm-fonts.patch
-Patch2:		mm-glibc.patch
-Patch3:		mm-csh.patch
-Patch4:		mm-uudecode.patch
-Patch5:		mm-sunquote.patch
-Patch6:		mm-tmpfile.patch
-Patch7:		mm-ohnonotagain.patch
-Patch8:		mm-arghhh.patch
-Patch9:		mm-ncurses.patch
-Patch10:	mm-nl.patch
+Patch0:		%{name}-make.patch
+Patch1:		%{name}-fonts.patch
+Patch2:		%{name}-glibc.patch
+Patch3:		%{name}-csh.patch
+Patch4:		%{name}-uudecode.patch
+Patch5:		%{name}-sunquote.patch
+Patch6:		%{name}-tmpfile.patch
+Patch7:		%{name}-ohnonotagain.patch
+Patch8:		%{name}-arghhh.patch
+Patch9:		%{name}-ncurses.patch
+Patch10:	%{name}-nl.patch
 Patch11:	%{name}-linux.patch
+Patch12:	%{name}-fixawk.patch
+Patch13:	%{name}-fixpartial.patch
+Patch14:	%{name}-usesox.patch
 BuildRequires:	ncurses-devel >= 5.0
 Requires:	mktemp
 Requires:	sharutils
@@ -58,6 +61,9 @@ i artyku³ach news.
 %patch9  -p1
 %patch10 -p1
 %patch11 -p1
+%patch12 -p1
+%patch13 -p1
+%patch14 -p1
 
 %build
 cd src
