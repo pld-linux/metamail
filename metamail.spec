@@ -5,7 +5,7 @@ Summary(pl):	Zestaw narzêdzi do obs³ugi standardu MIME
 Summary(tr):	MIME iþleme araçlarý
 Name:		metamail
 Version:	2.7
-Release:	33
+Release:	35
 License:	distributable
 Group:		Applications/Mail
 Source0:	ftp://thumper.bellcore.com/pub/nsb/mm%{version}.tar.Z
