@@ -19,7 +19,7 @@ Patch7:      mm-2.7-ohnonotagain.patch
 Patch8:      mm-2.7-arghhh.patch
 Patch9:      mm-ncurses.patch
 Requires:    mktemp sharutils csh
-BuildRoot:   /tmp/%{name}-%{version}-root
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
 Metamail is an implementation of MIME, the Multipurpose Internet Mail
