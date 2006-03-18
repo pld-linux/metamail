@@ -13,8 +13,8 @@
 # written by Bernhard Rosenkraenzer <bero@redhat.com>
 # (c) 2000-2001 Red Hat, Inc.
 #
-# made insensitive on file extention and piped stdout detection
-# by Andrzej M. Krzysztofowicz <ankry@pld.org.pl>
+# made insensitive on file extension and piped stdout detection
+# by Andrzej M. Krzysztofowicz <ankry@pld-linux.org>
 #
 # This script is in the public domain.
 
