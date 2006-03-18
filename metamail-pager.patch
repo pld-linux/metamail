@@ -1,0 +1,80 @@
+# replaces metamail-csh.patch
+
+--- mm2.7/src/src/metamail/mailto.c~	2006-03-18 00:13:53.000000000 +0200
++++ mm2.7/src/src/metamail/mailto.c	2006-03-18 00:24:51.000000000 +0200
+@@ -157,10 +157,13 @@
+ }
+ 
+ TildeHelp() {
+-    char *pager = getenv("PAGER");
++    char *pager;
+     char TmpName[100], CmdBuf[150];
+     FILE *fp;
+ 
++    if ((pager = getenv("METAMAIL_PAGER")) == NULL)
++        pager = getenv("PAGER");
++
+     strcpy(TmpName, tmpname());
+     fp = fdopen(mkstemp(TmpName), "w");
+     if (!fp) fp = stdout;
+@@ -209,7 +212,7 @@
+     fprintf(fp, "\n");
+     if (fp != stdout) {
+         fclose(fp);
+-        snprintf(CmdBuf, sizeof(CmdBuf), "%s %s", pager ? pager : "sensible-pager", TmpName);
++        snprintf(CmdBuf, sizeof(CmdBuf), "%s %s", pager ? pager : "more", TmpName);
+         SYSTEM(CmdBuf);
+         unlink(TmpName);
+     }
+--- mm2.7/src/bin/sun-message~	2006-03-18 00:13:53.000000000 +0200
++++ mm2.7/src/bin/sun-message	2006-03-18 00:26:48.000000000 +0200
+@@ -5,6 +5,11 @@
+ #  then gives the user a short menu of choices:
+ #    display, save or quit.
+ 
++if [ -z "$METAMAIL_PAGER" ]
++then
++	METAMAIL_PAGER=more
++fi
++
+ if [ "$2" = "uuencode" ]
+ then 
+ 	fn=`tempfile -p metamail -m 600`
+@@ -34,7 +34,7 @@
+ 		fi
+ 
+ 		case $ans in
+-			1)	sensible-pager $fn ;;
++			1)	more $fn ;;
+ 			2)	echo -n "Save as: $HOME/"
+ 				read nfn
+ 				if test ! -z "${nfn:-}"
+@@ -52,5 +52,5 @@
+ 		defans=3
+ 	done
+ else
+-	sensible-pager "$1"
++	more "$1"
+ fi
+--- mm2.7/src/bin/showexternal~	2006-03-18 00:13:53.000000000 +0200
++++ mm2.7/src/bin/showexternal	2006-03-18 00:27:26.000000000 +0200
+@@ -45,6 +45,10 @@
+ then
+ 	METAMAIL_TMPDIR=/tmp
+ fi
++if [ -z "$METAMAIL_PAGER" ]
++then
++	METAMAIL_PAGER=more
++fi
+ 
+ # Check argument integrity. Don't trust mail headers
+ if echo "$1$2$3$4$5$6$7" | grep -q '[[:space:]]'
+@@ -118,7 +118,7 @@
+ 
+ !
+ 		sed -e 1,/^\$/d < "$bodyfile" >> $TMPF
+-		sensible-pager $TMPF
++		${METAMAIL_PAGER} $TMPF
+ 		rm $TMPF ;;
+ 
+ 	*)
