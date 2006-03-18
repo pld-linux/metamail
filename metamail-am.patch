@@ -1,0 +1,14 @@
+--- mm2.7/src/configure.in~	2006-03-18 16:06:23.000000000 +0200
++++ mm2.7/src/configure.in	2006-03-18 16:15:23.000000000 +0200
+@@ -346,11 +346,6 @@
+ dnl *****************************************
+ dnl export of variable settings for Makefiles
+ 
+-dnl for libtool to work LTLIBOJS is needed (currently bug of autoconf)
+-Xsed="sed -e s/^X//"
+-LTLIBOBJS=`echo X"$LIBOBJS"|[$Xsed -e "s,\.[^.]* ,.lo ,g;s,\.[^.]*$,.lo,"]`
+-AC_SUBST(LTLIBOBJS)
+-
+ dnl the aux dir (for holding config & autodenerated stuff)
+ AC_SUBST(ac_aux_dir)
+ AC_SUBST(LPRCOMMAND)
