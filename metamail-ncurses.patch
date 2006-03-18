@@ -1,24 +1,39 @@
-diff -Nru mm2.7/src/metamail/Makefile mm2.7.new/src/metamail/Makefile
---- mm2.7/src/metamail/Makefile	Sun Aug  1 23:04:53 1993
-+++ mm2.7.new/src/metamail/Makefile	Sun Oct 18 10:04:42 1998
-@@ -45,7 +45,7 @@
+--- mm2.7/src/src/metamail/Makefile.am	2006-03-18 00:12:41.000000000 +0200
++++ mm2.7.ncurses3/src/src/metamail/Makefile.am	2006-03-18 00:12:20.000000000 +0200
+@@ -1,7 +1,5 @@
+ MAINTAINERCLEANFILES    = Makefile.in
  
- mailto: mailto.o codes.o shared.o
- 	rm -f mailto
--	$(CC) $(LOCALCFLAGS) -o mailto  mailto.o  codes.o shared.o -ltermcap $(LDLIBS)
-+	$(CC) $(LOCALCFLAGS) -o mailto  mailto.o  codes.o shared.o -ltinfo $(LDLIBS)
+-CFLAGS			= -lncurses
+-
+ INCLUDES                = -I$(top_builddir) -I$(top_builddir)/metamail \
+                         -I$(top_srcdir) -I$(top_srcdir)/metamail
  
- splitmail: splitmail.o shared.o
- 	rm -f splitmail
-diff -Nru mm2.7/src/richmail/Makefile mm2.7.new/src/richmail/Makefile
---- mm2.7/src/richmail/Makefile	Mon Mar 15 20:32:42 1993
-+++ mm2.7.new/src/richmail/Makefile	Sun Oct 18 10:05:08 1998
-@@ -34,7 +34,7 @@
- all:  richtext richtoatk
+@@ -15,7 +13,8 @@
+ mimencode_LDADD		= $(top_builddir)/metamail/libmetamail.la
  
- richtext: richtext.o $(RICHOBJS)
--	$(CC) ${LOCALCFLAGS} -o richtext richtext.o $(RICHOBJS) -ltermcap $(LDLIBS)
-+	$(CC) ${LOCALCFLAGS} -o richtext richtext.o $(RICHOBJS) -ltinfo $(LDLIBS)
+ mailto_SOURCES		= mailto.c codes.c shared.c
+-mailto_LDADD		= $(top_builddir)/metamail/libmetamail.la
++mailto_LDADD		= $(top_builddir)/metamail/libmetamail.la -ltinfo
++mailto_CFLAGS		= -I/usr/include/ncurses
  
- richtoatk: richtoatk.o $(RICHOBJS)
- 	$(CC) ${LOCALCFLAGS} -o richtoatk richtoatk.o $(RICHOBJS) $(LDLIBS)
+ splitmail_SOURCES	= splitmail.c shared.c
+ splitmail_LDADD		= $(top_builddir)/metamail/libmetamail.la
+--- mm2.7/src/src/richmail/Makefile.am	2006-03-18 00:12:41.000000000 +0200
++++ mm2.7.ncurses3/src/src/richmail/Makefile.am	2006-03-18 00:12:20.000000000 +0200
+@@ -1,14 +1,13 @@
+ MAINTAINERCLEANFILES    = Makefile.in
+ 
+-CFLAGS			= -lncurses
+-
+ INCLUDES                = -I$(top_builddir) -I$(top_builddir)/metamail \
+                         -I$(top_srcdir) -I$(top_srcdir)/metamail
+ 
+ bin_PROGRAMS            = richtext richtoatk
+ 
+ richtext_SOURCES	= richtext.c richlex.c richset.c usascii.c iso2022.c
+-richtext_LDADD		= $(top_builddir)/metamail/libmetamail.la
++richtext_LDADD		= $(top_builddir)/metamail/libmetamail.la -ltinfo
++richtext_CFLAGS		= -I/usr/include/ncurses
+ 
+ richtoatk_SOURCES	= richtoatk.c richlex.c richset.c usascii.c iso2022.c
+ richtoatk_LDADD		= $(top_builddir)/metamail/libmetamail.la
