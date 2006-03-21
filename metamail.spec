@@ -9,7 +9,7 @@ Summary(pl):	Zestaw narzêdzi do obs³ugi standardu MIME
 Summary(tr):	MIME iþleme araçlarý
 Name:		metamail
 Version:	%{_ver}.%{_debrel}
-Release:	0.15
+Release:	1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	ftp://thumper.bellcore.com/pub/nsb/mm%{_ver}.tar.Z
