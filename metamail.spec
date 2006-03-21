@@ -53,7 +53,10 @@ This version includes Debian patches.
 Metamail obs³uguje standard MIME (rozszerzenie poczty internetowej dla
 ró¿nych celów) u¿ywany do przesy³ania poczt± plików multimedialnych.
 MIME jest te¿ wykorzystywany do kodowania znaków narodowych w listach
-i artyku³ach news.
+i artyku³ach news. Metamail jest konfigurowalny poprzez mechanizm
+"mailcap" opisany w informacyjnym RFC towarzysz±cym dokumentacji MIME.
+
+Ta wersja zawiera ³aty z Debiana.
 
 %prep
 %setup -q -n mm%{_ver}
@@ -90,7 +93,8 @@ cd src
 %{__autoheader}
 %{__automake}
 %{__autoconf}
-%configure
+%configure \
+	--disable-static
 %{__make} -j1
 %{__make} -C fonts
 
@@ -112,7 +116,7 @@ mkfontdir $RPM_BUILD_ROOT%{_fontdir}
 
 #ln -f $RPM_BUILD_ROOT%{_bindir}/mmencode $RPM_BUILD_ROOT%{_bindir}/mimencode
 rm -rf $RPM_BUILD_ROOT%{_includedir}/metamail
-rm -rf $RPM_BUILD_ROOT%{_libdir}/libmetamail.{la,a}
+rm -f $RPM_BUILD_ROOT%{_libdir}/libmetamail.la
 
 # that site doesn't exist
 rm $RPM_BUILD_ROOT{%{_bindir}/patch-metamail,%{_mandir}/man1/patch-metamail.1}
@@ -127,7 +131,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc src/{README,CREDITS,mailers.txt}
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/libmetamail.so.0.0.0
+%attr(755,root,root) %{_libdir}/libmetamail.so.*.*.*
 %{_libdir}/metamail
 %{_mandir}/man1/*
 %lang(fi) %{_mandir}/fi/man1/*
