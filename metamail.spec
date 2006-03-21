@@ -84,7 +84,7 @@ cd ..
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-#%patch6 -p1 - neccessary?
+%patch6 -p1
 
 %build
 cd src
