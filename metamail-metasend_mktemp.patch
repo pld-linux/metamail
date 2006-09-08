@@ -1,0 +1,12 @@
+--- src/bin/metasend.orig	2006-09-08 16:05:11.000000000 +0200
++++ src/bin/metasend	2006-09-08 16:08:52.000000000 +0200
+@@ -454,7 +454,7 @@
+ eval isentity${multipart}=$isentity
+ eval encodingprog${multipart}=\"\$encodingprog\"
+ 
+-fname=`tempfile -p metamail -m 600`
++fname=`mktemp -t metasend.XXXXXXX` || exit 1
+ echo "MIME-Version: 1.0" > $fname
+ 
+ if test ! -z "${to:-}"
+
