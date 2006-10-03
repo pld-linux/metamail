@@ -1,0 +1,11 @@
+--- mm2.7/src/src/metamail/metamail.c.orig	2006-10-03 10:52:31.058827750 +0200
++++ mm2.7/src/src/metamail/metamail.c	2006-10-03 10:51:49.000000000 +0200
+@@ -1955,7 +1955,7 @@
+         default:
+             ConsumeRestOfPart(OutputFP);
+     }
+-    if (UsingStandardInput && feof(InputFP) && !freopen("/dev/tty", "r", stdin)) {
++    if (!MustNotBeTty && UsingStandardInput && feof(InputFP) && !freopen("/dev/tty", "r", stdin)) {
+         fprintf(stderr, "Warning: Cannot freopen /dev/tty to stdin");
+     } else InputFP = stdin;
+ }
