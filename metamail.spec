@@ -1,7 +1,7 @@
 # TODO
 # - drop fonts and sun/apple/server stuff as did debian? (read debian/README.debian)
 %define	_ver	2.7
-%define	_debrel 51
+%define	_debrel 52
 Summary:	Collection of MIME handling utilities
 Summary(de):	Sammlung von MIME-Behandlungs-Utilities
 Summary(fr):	Ensemble d'utilitaires de gestion MIME
@@ -9,7 +9,7 @@ Summary(pl):	Zestaw narzêdzi do obs³ugi standardu MIME
 Summary(tr):	MIME iþleme araçlarý
 Name:		metamail
 Version:	%{_ver}.%{_debrel}
-Release:	2
+Release:	1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	ftp://thumper.bellcore.com/pub/nsb/mm%{_ver}.tar.Z
@@ -18,7 +18,7 @@ Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-ma
 # Source1-md5:	0ad0e591d536bc4e0d5ae97514ee6cc4
 Source2:	htmlview
 Source3:	ftp://ftp.debian.org/debian/pool/main/m/metamail/%{name}_%{_ver}-%{_debrel}.diff.gz
-# Source3-md5:	8152ee3780223118a18e4d0969a6ddad
+# Source3-md5:	43d21022f048b6610932cf6f6f46b516
 Patch0:		%{name}-ncurses.patch
 Patch1:		%{name}-pager.patch
 Patch2:		%{name}-linux.patch
