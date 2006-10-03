@@ -9,7 +9,7 @@ Summary(pl):	Zestaw narzêdzi do obs³ugi standardu MIME
 Summary(tr):	MIME iþleme araçlarý
 Name:		metamail
 Version:	%{_ver}.%{_debrel}
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	ftp://thumper.bellcore.com/pub/nsb/mm%{_ver}.tar.Z
@@ -27,6 +27,7 @@ Patch4:		%{name}-fonts.patch
 Patch5:		%{name}-am.patch
 Patch6:		%{name}-suggestedname.patch
 Patch7:		%{name}-metasend_mktemp.patch
+Patch8:		%{name}-procmail_warning.patch
 BuildRequires:	XFree86
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -87,6 +88,7 @@ cd ..
 %patch5 -p1
 %patch6 -p1
 %patch7 -p0
+%patch8 -p1
 
 %build
 cd src
