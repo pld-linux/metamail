@@ -3,10 +3,10 @@
 %define	_ver	2.7
 %define	_debrel 52
 Summary:	Collection of MIME handling utilities
-Summary(de):	Sammlung von MIME-Behandlungs-Utilities
-Summary(fr):	Ensemble d'utilitaires de gestion MIME
-Summary(pl):	Zestaw narzêdzi do obs³ugi standardu MIME
-Summary(tr):	MIME iþleme araçlarý
+Summary(de.UTF-8):   Sammlung von MIME-Behandlungs-Utilities
+Summary(fr.UTF-8):   Ensemble d'utilitaires de gestion MIME
+Summary(pl.UTF-8):   Zestaw narzÄ™dzi do obsÅ‚ugi standardu MIME
+Summary(tr.UTF-8):   MIME iÅŸleme araÃ§larÄ±
 Name:		metamail
 Version:	%{_ver}.%{_debrel}
 Release:	3
@@ -50,14 +50,14 @@ informational RFC that is a companion to the MIME document.
 
 This version includes Debian patches.
 
-%description -l pl
-Metamail obs³uguje standard MIME (rozszerzenie poczty internetowej dla
-ró¿nych celów) u¿ywany do przesy³ania poczt± plików multimedialnych.
-MIME jest te¿ wykorzystywany do kodowania znaków narodowych w listach
-i artyku³ach news. Metamail jest konfigurowalny poprzez mechanizm
-"mailcap" opisany w informacyjnym RFC towarzysz±cym dokumentacji MIME.
+%description -l pl.UTF-8
+Metamail obsÅ‚uguje standard MIME (rozszerzenie poczty internetowej dla
+rÃ³Å¼nych celÃ³w) uÅ¼ywany do przesyÅ‚ania pocztÄ… plikÃ³w multimedialnych.
+MIME jest teÅ¼ wykorzystywany do kodowania znakÃ³w narodowych w listach
+i artykuÅ‚ach news. Metamail jest konfigurowalny poprzez mechanizm
+"mailcap" opisany w informacyjnym RFC towarzyszÄ…cym dokumentacji MIME.
 
-Ta wersja zawiera ³aty z Debiana.
+Ta wersja zawiera Å‚aty z Debiana.
 
 %prep
 %setup -q -n mm%{_ver}
