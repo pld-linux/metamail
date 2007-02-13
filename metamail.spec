@@ -3,10 +3,10 @@
 %define	_ver	2.7
 %define	_debrel 52
 Summary:	Collection of MIME handling utilities
-Summary(de.UTF-8):   Sammlung von MIME-Behandlungs-Utilities
-Summary(fr.UTF-8):   Ensemble d'utilitaires de gestion MIME
-Summary(pl.UTF-8):   Zestaw narzędzi do obsługi standardu MIME
-Summary(tr.UTF-8):   MIME işleme araçları
+Summary(de.UTF-8):	Sammlung von MIME-Behandlungs-Utilities
+Summary(fr.UTF-8):	Ensemble d'utilitaires de gestion MIME
+Summary(pl.UTF-8):	Zestaw narzędzi do obsługi standardu MIME
+Summary(tr.UTF-8):	MIME işleme araçları
 Name:		metamail
 Version:	%{_ver}.%{_debrel}
 Release:	3
