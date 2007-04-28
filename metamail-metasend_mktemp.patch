@@ -5,7 +5,7 @@
  eval encodingprog${multipart}=\"\$encodingprog\"
  
 -fname=`tempfile -p metamail -m 600`
-+fname=`mktemp -t metasend.XXXXXXX` || exit 1
++fname=`mktemp -t metasend.XXXXXX` || exit 1
  echo "MIME-Version: 1.0" > $fname
  
  if test ! -z "${to:-}"
