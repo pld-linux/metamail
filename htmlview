@@ -138,7 +138,7 @@ else
 	TERMS="$TERMS_KDE $TERMS_GNOME $TERMS_GENERIC"
 fi
 
-if test "x$DISPLAY" = x; then
+if test "x$DISPLAY" = x || [ $STDOUT_IS_PIPE = 1 ]; then
 	for i in $TTYTOOLS; do
 		if IS_FUNC_WORKING $i; then
 			$i $*
