@@ -31,7 +31,7 @@ else
 		REMOTE=0
 	fi
 fi
-if ls -l /proc/self/fd/1 | grep 'pipe:' >/dev/null 2>&1; then
+if ls -l /proc/$$/fd/1 | grep 'pipe:' >/dev/null 2>&1; then
 	STDOUT_IS_PIPE=1
 else
 	STDOUT_IS_PIPE=0
