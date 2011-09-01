@@ -1,7 +1,7 @@
 # TODO
 # - drop fonts and sun/apple/server stuff as did debian? (read debian/README.debian)
 %define	_ver	2.7
-%define	_debrel 52
+%define	_debrel 54
 Summary:	Collection of MIME handling utilities
 Summary(de.UTF-8):	Sammlung von MIME-Behandlungs-Utilities
 Summary(fr.UTF-8):	Ensemble d'utilitaires de gestion MIME
@@ -9,16 +9,16 @@ Summary(pl.UTF-8):	Zestaw narzędzi do obsługi standardu MIME
 Summary(tr.UTF-8):	MIME işleme araçları
 Name:		metamail
 Version:	%{_ver}.%{_debrel}
-Release:	6
+Release:	1
 License:	GPL v2
 Group:		Applications/Mail
-Source0:	ftp://thumper.bellcore.com/pub/nsb/mm%{_ver}.tar.Z
+Source0:	mm%{_ver}.tar.Z
 # Source0-md5:	fd5617ea87e20d7f2fa839e1d1fede60
 Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 # Source1-md5:	0ad0e591d536bc4e0d5ae97514ee6cc4
 Source2:	htmlview
 Source3:	ftp://ftp.debian.org/debian/pool/main/m/metamail/%{name}_%{_ver}-%{_debrel}.diff.gz
-# Source3-md5:	43d21022f048b6610932cf6f6f46b516
+# Source3-md5:	2071dc7b9c33345443ab9a619e640a69
 Patch0:		%{name}-ncurses.patch
 Patch1:		%{name}-pager.patch
 Patch2:		%{name}-linux.patch
@@ -28,6 +28,7 @@ Patch5:		%{name}-am.patch
 Patch6:		%{name}-suggestedname.patch
 Patch7:		%{name}-metasend_mktemp.patch
 Patch8:		%{name}-procmail_warning.patch
+Patch9:		metamail-2.7.53.3-glibc-2.10.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
@@ -88,6 +89,9 @@ cd ..
 %patch6 -p1
 %patch7 -p0
 %patch8 -p1
+cd src
+%patch9 -p1
+cd ..
 
 %build
 cd src
