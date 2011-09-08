@@ -77,7 +77,7 @@ mv metamail.org/splitmail.c metamail
 chmod +x configure
 
 # same as mimeencode
-%{__rm} man/mmencode.1
+echo '.so mimencode.1' > man/mmencode.1
 
 cd ..
 %patch0 -p1
@@ -122,9 +122,12 @@ bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_bindir}
 mkfontdir $RPM_BUILD_ROOT%{_fontdir}
 
-#ln -f $RPM_BUILD_ROOT%{_bindir}/mmencode $RPM_BUILD_ROOT%{_bindir}/mimencode
+# compatibility hardlink
+ln -f $RPM_BUILD_ROOT%{_bindir}/mimencode $RPM_BUILD_ROOT%{_bindir}/mmencode
+
+# just utility functions library for metamail, not exported metamail functionality - so kill it
 %{__rm} -r $RPM_BUILD_ROOT%{_includedir}/metamail
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/libmetamail.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libmetamail.{so,la}
 
 # that site doesn't exist
 %{__rm} $RPM_BUILD_ROOT{%{_bindir}/patch-metamail,%{_mandir}/man1/patch-metamail.1}
@@ -150,6 +153,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/metasend
 %attr(755,root,root) %{_bindir}/mimeit
 %attr(755,root,root) %{_bindir}/mimencode
+%attr(755,root,root) %{_bindir}/mmencode
 %attr(755,root,root) %{_bindir}/rcvAppleSingle
 %attr(755,root,root) %{_bindir}/richtext
 %attr(755,root,root) %{_bindir}/richtoatk
@@ -181,6 +185,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/mime.1*
 %{_mandir}/man1/mimeit.1*
 %{_mandir}/man1/mimencode.1*
+%{_mandir}/man1/mmencode.1*
 %{_mandir}/man1/richtext.1*
 %{_mandir}/man1/showaudio.1*
 %{_mandir}/man1/showexternal.1*
