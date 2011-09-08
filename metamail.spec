@@ -1,23 +1,23 @@
 # TODO
 # - drop fonts and sun/apple/server stuff as did debian? (read debian/README.debian)
-%define	_ver	2.7
-%define	_debrel 54
+%define	ver	2.7
+%define	debrel	54
 Summary:	Collection of MIME handling utilities
 Summary(de.UTF-8):	Sammlung von MIME-Behandlungs-Utilities
 Summary(fr.UTF-8):	Ensemble d'utilitaires de gestion MIME
 Summary(pl.UTF-8):	Zestaw narzędzi do obsługi standardu MIME
 Summary(tr.UTF-8):	MIME işleme araçları
 Name:		metamail
-Version:	%{_ver}.%{_debrel}
+Version:	%{ver}.%{debrel}
 Release:	1
 License:	GPL v2
 Group:		Applications/Mail
-Source0:	mm%{_ver}.tar.Z
+Source0:	mm%{ver}.tar.Z
 # Source0-md5:	fd5617ea87e20d7f2fa839e1d1fede60
 Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 # Source1-md5:	0ad0e591d536bc4e0d5ae97514ee6cc4
 Source2:	htmlview
-Source3:	ftp://ftp.debian.org/debian/pool/main/m/metamail/%{name}_%{_ver}-%{_debrel}.diff.gz
+Source3:	ftp://ftp.debian.org/debian/pool/main/m/metamail/%{name}_%{ver}-%{debrel}.diff.gz
 # Source3-md5:	2071dc7b9c33345443ab9a619e640a69
 Patch0:		%{name}-ncurses.patch
 Patch1:		%{name}-pager.patch
@@ -28,7 +28,7 @@ Patch5:		%{name}-am.patch
 Patch6:		%{name}-suggestedname.patch
 Patch7:		%{name}-metasend_mktemp.patch
 Patch8:		%{name}-procmail_warning.patch
-Patch9:		metamail-2.7.53.3-glibc-2.10.patch
+Patch9:		%{name}-2.7.53.3-glibc-2.10.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
@@ -61,12 +61,12 @@ i artykułach news. Metamail jest konfigurowalny poprzez mechanizm
 Ta wersja zawiera łaty z Debiana.
 
 %prep
-%setup -q -n mm%{_ver}
+%setup -q -n mm%{ver}
 cd src
 
 # there's {metamail,richmail} unused in debian patch and metamail is libmetamail sources
 # but due debian patch patching (erronously probably) metamail/splitmail.c, we need to keep it first
-rm -rf richmail
+%{__rm} -r richmail
 mv metamail metamail.org
 mkdir metamail
 mv metamail.org/splitmail.c metamail
@@ -77,7 +77,7 @@ mv metamail.org/splitmail.c metamail
 chmod +x configure
 
 # same as mimeencode
-rm man/mmencode.1
+%{__rm} man/mmencode.1
 
 cd ..
 %patch0 -p1
@@ -95,11 +95,11 @@ cd ..
 
 %build
 cd src
-%{__aclocal} -I config
 %{__libtoolize}
+%{__aclocal} -I config
+%{__autoconf}
 %{__autoheader}
 %{__automake}
-%{__autoconf}
 %configure \
 	--disable-static
 %{__make} -j1
@@ -107,13 +107,14 @@ cd src
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_fontdir},%{_mandir}/man1}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_fontdir},%{_mandir}/man{1,5}}
 
 cd src
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install man/* debian/mimencode.1 debian/mimeit.1 $RPM_BUILD_ROOT%{_mandir}/man1
+install man/*.1 debian/mimencode.1 debian/mimeit.1 $RPM_BUILD_ROOT%{_mandir}/man1
+install man/*.5 $RPM_BUILD_ROOT%{_mandir}/man5
 
 install fonts/*.pcf 	  $RPM_BUILD_ROOT%{_fontdir}
 install fonts/fonts.alias $RPM_BUILD_ROOT%{_fontdir}
@@ -122,11 +123,11 @@ install %{SOURCE2} $RPM_BUILD_ROOT%{_bindir}
 mkfontdir $RPM_BUILD_ROOT%{_fontdir}
 
 #ln -f $RPM_BUILD_ROOT%{_bindir}/mmencode $RPM_BUILD_ROOT%{_bindir}/mimencode
-rm -rf $RPM_BUILD_ROOT%{_includedir}/metamail
-rm -f $RPM_BUILD_ROOT%{_libdir}/libmetamail.la
+%{__rm} -r $RPM_BUILD_ROOT%{_includedir}/metamail
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libmetamail.la
 
 # that site doesn't exist
-rm $RPM_BUILD_ROOT{%{_bindir}/patch-metamail,%{_mandir}/man1/patch-metamail.1}
+%{__rm} $RPM_BUILD_ROOT{%{_bindir}/patch-metamail,%{_mandir}/man1/patch-metamail.1}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -137,9 +138,58 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc src/{README,CREDITS,mailers.txt}
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/audiocompose
+%attr(755,root,root) %{_bindir}/audiosend
+%attr(755,root,root) %{_bindir}/extcompose
+%attr(755,root,root) %{_bindir}/getfilename
+%attr(755,root,root) %{_bindir}/htmlview
+%attr(755,root,root) %{_bindir}/mailserver
+%attr(755,root,root) %{_bindir}/mailto
+%attr(755,root,root) %{_bindir}/mailto-hebrew
+%attr(755,root,root) %{_bindir}/metamail
+%attr(755,root,root) %{_bindir}/metasend
+%attr(755,root,root) %{_bindir}/mimeit
+%attr(755,root,root) %{_bindir}/mimencode
+%attr(755,root,root) %{_bindir}/rcvAppleSingle
+%attr(755,root,root) %{_bindir}/richtext
+%attr(755,root,root) %{_bindir}/richtoatk
+%attr(755,root,root) %{_bindir}/showaudio
+%attr(755,root,root) %{_bindir}/showexternal
+%attr(755,root,root) %{_bindir}/shownonascii
+%attr(755,root,root) %{_bindir}/showpartial
+%attr(755,root,root) %{_bindir}/showpicture
+%attr(755,root,root) %{_bindir}/sndAppleSingle
+%attr(755,root,root) %{_bindir}/splitmail
+%attr(755,root,root) %{_bindir}/sun-audio-file
+%attr(755,root,root) %{_bindir}/sun-message
+%attr(755,root,root) %{_bindir}/sun-message.csh
+%attr(755,root,root) %{_bindir}/sun-to-mime
+%attr(755,root,root) %{_bindir}/sun2mime
+%attr(755,root,root) %{_bindir}/uudepipe
+%attr(755,root,root) %{_bindir}/uuenpipe
 %attr(755,root,root) %{_libdir}/libmetamail.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libmetamail.so.0
 %{_libdir}/metamail
-%{_mandir}/man1/*
+%{_mandir}/man1/audiocompose.1*
+%{_mandir}/man1/audiosend.1*
+%{_mandir}/man1/extcompose.1*
+%{_mandir}/man1/getfilename.1*
+%{_mandir}/man1/mailto-hebrew.1*
+%{_mandir}/man1/mailto.1*
+%{_mandir}/man1/metamail.1*
+%{_mandir}/man1/metasend.1*
+%{_mandir}/man1/mime.1*
+%{_mandir}/man1/mimeit.1*
+%{_mandir}/man1/mimencode.1*
+%{_mandir}/man1/richtext.1*
+%{_mandir}/man1/showaudio.1*
+%{_mandir}/man1/showexternal.1*
+%{_mandir}/man1/shownonascii.1*
+%{_mandir}/man1/showpartial.1*
+%{_mandir}/man1/showpicture.1*
+%{_mandir}/man1/splitmail.1*
+%{_mandir}/man1/uudepipe.1*
+%{_mandir}/man1/uuenpipe.1*
+%{_mandir}/man5/mailcap.5*
 %lang(fi) %{_mandir}/fi/man1/*
 %lang(pl) %{_mandir}/pl/man1/*
