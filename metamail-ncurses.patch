@@ -13,7 +13,7 @@
  
  mailto_SOURCES		= mailto.c codes.c shared.c
 -mailto_LDADD		= $(top_builddir)/metamail/libmetamail.la
-+mailto_LDADD		= $(top_builddir)/metamail/libmetamail.la -ltinfo
++mailto_LDADD		= $(top_builddir)/metamail/libmetamail.la -lncurses
 +mailto_CFLAGS		= -I/usr/include/ncurses
  
  splitmail_SOURCES	= splitmail.c shared.c
@@ -32,7 +32,7 @@
  
  richtext_SOURCES	= richtext.c richlex.c richset.c usascii.c iso2022.c
 -richtext_LDADD		= $(top_builddir)/metamail/libmetamail.la
-+richtext_LDADD		= $(top_builddir)/metamail/libmetamail.la -ltinfo
++richtext_LDADD		= $(top_builddir)/metamail/libmetamail.la -lncurses
 +richtext_CFLAGS		= -I/usr/include/ncurses
  
  richtoatk_SOURCES	= richtoatk.c richlex.c richset.c usascii.c iso2022.c
