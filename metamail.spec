@@ -17,7 +17,7 @@ Source0:	mm%{ver}.tar.Z
 Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 # Source1-md5:	0ad0e591d536bc4e0d5ae97514ee6cc4
 Source2:	htmlview
-Source3:	ftp://ftp.debian.org/debian/pool/main/m/metamail/%{name}_%{ver}-%{debrel}.diff.gz
+Source3:	http://ftp.debian.org/debian/pool/main/m/metamail/%{name}_%{ver}-%{debrel}.diff.gz
 # Source3-md5:	2071dc7b9c33345443ab9a619e640a69
 Patch0:		%{name}-ncurses.patch
 Patch1:		%{name}-pager.patch
